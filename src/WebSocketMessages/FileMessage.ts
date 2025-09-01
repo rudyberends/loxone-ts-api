@@ -1,9 +1,10 @@
-import WebSocket from "ws";
-import WebSocketMessage from "./WebSocketMessage.js";
+import WebSocket from 'ws';
+import WebSocketMessage from './WebSocketMessage.js';
 
 class FileMessage extends WebSocketMessage {
     filename: string;
     type: 'json' | 'text' | 'binary';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any;
 
     constructor(message: WebSocket.RawData, isBinary: boolean, filename: string) {
