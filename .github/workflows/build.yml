@@ -6,6 +6,12 @@ on:
         tags-ignore:
             - 'v*'
     pull_request:
+    workflow_dispatch:
+      inputs:
+        skip_ci:
+          description: 'Set to "true" to skip CI when running manually'
+          required: false
+          default: 'false'
     
 concurrency:
   group: ${{ github.ref }}
@@ -14,7 +20,15 @@ concurrency:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: >-
+      (github.event_name == 'push' && !contains(github.event.head_commit.message || '', '[skip ci]'))
+      ||
+      (github.event_name == 'pull_request' &&
+        !contains(github.event.pull_request.title || '', '[skip ci]') &&
+        !contains(github.event.pull_request.body || '', '[skip ci]'))
+      ||
+      (github.event_name == 'workflow_dispatch' &&
+        (github.event.inputs.skip_ci || '') != 'true')
 
     strategy:
       fail-fast: false
