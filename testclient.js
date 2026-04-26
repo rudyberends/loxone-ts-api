@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import LoxoneClient from './dist/LoxoneClient.js';
 
 // instantiate the client
