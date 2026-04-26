@@ -1,8 +1,6 @@
 # loxone-ts-api
 A Node module written in TypeScript for facilitating communication with Loxone Miniservers. Communication is done using http and WebSockets.
 
-Currently only implemented http/ws communication to enable support for Gen.1 and Gen.2 Miniservers. https/wss communication currently not supported, but planned.
-
 ## Key featrues
 
 - Connects to the Loxone Miniserver via WebSocket
